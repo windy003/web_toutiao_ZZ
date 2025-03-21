@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机展示文本</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="180x180.png">
+    <style>
+        a{
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="background-color:  #F2F0E9;">
+    <h1>随机展示 5 个元素,爬取时间:2025-03-21</h1>
+    <div id="output" style="font-size: 40px; color: #333; line-height: 1.5;    "></div>
+
+    <script>
+        // 文件路径
+        const fileUrl = './头条作者文章库/BDJC12.txt';
+
+        // 读取文件并处理
+        async function loadAndDisplayRandomLines() {
+            try {
+                // 获取文件内容
+                const response = await fetch(fileUrl);
+                const text = await response.text();
+
+                // 按行分割
+                const lines = text.split('\n').filter(line => line.trim() !== '');
+
+                // 随机选取 5 个元素
+                const randomLines = getRandomElements(lines, 5);
+
+                // 展示结果
+                const output = document.getElementById('output');
+                output.innerHTML = randomLines.map(line => `<p>${line}</p>`).join('');
+            } catch (error) {
+                console.error('读取文件失败:', error);
+            }
+        }
+
+        // 从数组中随机选取指定数量的元素
+        function getRandomElements(array, count) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // 页面加载时执行
+        window.onload = loadAndDisplayRandomLines;
+    </script>
+</body>
+</html>
