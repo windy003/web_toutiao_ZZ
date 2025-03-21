@@ -89,6 +89,8 @@ try:
                     title_text = title_element.text
                     if "\n" in title_text:
                         title_text = title_text.replace("\n", "")
+                    if len(title_text) > 30:
+                        title_text = title_text[:30]
                     href = title_element.attr('href')
                     title = f'<a href="{href}" target="_blank" rel="noopener" aria-label="{title_text}">{title_text}</a>  <br><br><br>'
                     data += publish_time + title + "\n"
