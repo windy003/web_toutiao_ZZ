@@ -14,9 +14,8 @@
 </head>
 <body style="background-color:  #F2F0E9;">
     <h1>随机展示今日头条作者的 5 个元素</h1>
+    
 
-
-    <button id="btn" style="font-size: 20px; color: #f6f2f2; background-color: #4caf50; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">随机刷新</button>
 
     <div style="margin-top: 20px; font-size: 20px;">
         <label for="menu">选择爬取的作者</label>            
@@ -32,6 +31,12 @@
 
     <div id="output" style="font-size: 40px; color: #333; line-height: 1.5;    "></div>
 
+
+    
+    <button id="btn" style="font-size: 20px; color: #f6f2f2; background-color: #4caf50; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">随机刷新</button>
+
+
+
     <script>
         // 文件路径
 
@@ -40,14 +45,17 @@
 
         const refresh_btn = document.getElementById('btn');
         
-        // let fileUrl = '';  // 初始值
-
         refresh_btn.addEventListener('click', function() {
             const selectedValue = menu.value;
             const selectedOption = menu.options[menu.selectedIndex];  // 获取选中的option元素
             const selectedText = selectedOption.text;  // 获取option的文本内容
             const fileUrl = `./头条作者文章库/${selectedText}.txt`;
             loadAndDisplayRandomLines(fileUrl);
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'  // 添加平滑滚动效果
+            });
         });
         
         menu.addEventListener('change', function() {
@@ -103,10 +111,7 @@
             return shuffled.slice(0, count);
         }
         
-         
-        btn.addEventListener('click', function() {
-            loadAndDisplayRandomLines(fileUrl);
-        });
+       
 
 
 
