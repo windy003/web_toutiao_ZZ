@@ -38,11 +38,18 @@
         const menu = document.getElementById('menu');
         const infoDiv = document.getElementById('info');
 
-        const btn = document.getElementById('btn');
+        const refresh_btn = document.getElementById('btn');
         
-        let fileUrl = './头条作者文章库/BDJC12.txt';  // 初始值
+        // let fileUrl = '';  // 初始值
 
-
+        refresh_btn.addEventListener('click', function() {
+            const selectedValue = menu.value;
+            const selectedOption = menu.options[menu.selectedIndex];  // 获取选中的option元素
+            const selectedText = selectedOption.text;  // 获取option的文本内容
+            const fileUrl = `./头条作者文章库/${selectedText}.txt`;
+            loadAndDisplayRandomLines(fileUrl);
+        });
+        
         menu.addEventListener('change', function() {
             const selectedValue = this.value;
 
