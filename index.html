@@ -13,15 +13,64 @@
     </style>
 </head>
 <body style="background-color:  #F2F0E9;">
-    <h1>随机展示 5 个元素,爬取时间:2025-03-21</h1>
+    <h1>随机展示今日头条作者的 5 个元素</h1>
+
+
+    <button id="btn" style="font-size: 20px; color: #f6f2f2; background-color: #4caf50; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">随机刷新</button>
+
+    <div style="margin-top: 20px; font-size: 20px;">
+        <label for="menu">选择爬取的作者</label>            
+        <select id="menu" style="font-size: 20px; color: #333; background-color: #f6f2f2; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            <option value="1">BDJC12</option>
+            <option value="2">散文随风想</option>
+        </select>
+    </div>
+
+    <div id="info" style="margin-top: 20px; font-size: 20px; font-style: italic;color: #5007d7;"></div>
+
+
+
     <div id="output" style="font-size: 40px; color: #333; line-height: 1.5;    "></div>
 
     <script>
         // 文件路径
-        const fileUrl = './头条作者文章库/BDJC12.txt';
 
+        const menu = document.getElementById('menu');
+        const infoDiv = document.getElementById('info');
+
+        const btn = document.getElementById('btn');
+        
+        let fileUrl = './头条作者文章库/BDJC12.txt';  // 初始值
+
+
+        menu.addEventListener('change', function() {
+            const selectedValue = this.value;
+
+            const selectedOption = this.options[this.selectedIndex];  // 获取选中的option元素
+            const selectedText = selectedOption.text;  // 获取option的文本内容
+            
+            const fileUrl = `./头条作者文章库/${selectedText}.txt`;
+            
+        
+            // 根据选择的值显示不同信息
+            switch(selectedValue) {
+                case '1':
+                    infoDiv.innerHTML = 'BDJC12 的详细信息：爬取时间:2025-03-21';
+                    break;
+                case '2':
+                    infoDiv.innerHTML = '散文随风想 的详细信息: 爬取时间:2025-03-224';
+                    break;
+                default:
+                    infoDiv.innerHTML = '';
+            }
+
+
+            loadAndDisplayRandomLines(fileUrl);
+    });
+
+        
         // 读取文件并处理
-        async function loadAndDisplayRandomLines() {
+        async function loadAndDisplayRandomLines(fileUrl) {
             try {
                 // 获取文件内容
                 const response = await fetch(fileUrl);
@@ -46,6 +95,14 @@
             const shuffled = array.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
+        
+         
+        btn.addEventListener('click', function() {
+            loadAndDisplayRandomLines(fileUrl);
+        });
+
+
+
 
         // 页面加载时执行
         window.onload = loadAndDisplayRandomLines;
