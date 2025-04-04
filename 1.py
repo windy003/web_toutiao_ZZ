@@ -14,7 +14,7 @@ page = ChromiumPage(options)
 # print("已启动无头浏览器...")
 
 
-url = "https://www.toutiao.com/c/user/token/MS4wLjABAAAA6p4Ri7jHFxaEmJK_pJoZWbw3JZ7YKrgFRyOlJv8xK94/?"
+url = "https://www.toutiao.com/c/user/token/MS4wLjABAAAAlGO_T4EAFAk6AvJm9pfM6y5eQkCCCkSL-HFCz20klU8/?source=m_redirect"
 
 
 
@@ -23,34 +23,21 @@ try:
 
     # 滚动页面并加载更多内容
     try:
+        # page.run_js('document.body.style.zoom = "25%"')  # 将页面缩放至10%
+        # 耗时6分钟,处理914个条目
         # 使用 JavaScript 获取页面高度
         last_height = page.run_js('return document.documentElement.scrollHeight')
         while True:
-            # 滚动到底部
             page.scroll.to_bottom()
-            print("已滚动到底部，等待新内容加载...")
-            time.sleep(3)  # 等待新内容加载
-
-            # 使用 JavaScript 获取新的页面高度
+            time.sleep(3)
             new_height = page.run_js('return document.documentElement.scrollHeight')
-
-            # 如果页面高度没有变化，说明已经到底部
             if new_height == last_height:
                 time.sleep(6)
                 page.scroll.to_bottom()
                 new_height = page.run_js('return document.documentElement.scrollHeight')
                 if new_height == last_height:
-                   time.sleep(9)
-                   page.scroll.to_bottom()
-                   new_height = page.run_js('return document.documentElement.scrollHeight') 
-                   if new_height == last_height:
-                        print("已到达页面底部，停止滚动。")
-                        break
-                       
-                
-                
-                
-                
+                    print("已到达页面底部，停止滚动。")
+                    break
 
             # 更新页面高度
             last_height = new_height
