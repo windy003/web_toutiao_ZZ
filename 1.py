@@ -14,7 +14,7 @@ page = ChromiumPage(options)
 # print("已启动无头浏览器...")
 
 
-url = "https://www.toutiao.com/c/user/token/MS4wLjABAAAAlGO_T4EAFAk6AvJm9pfM6y5eQkCCCkSL-HFCz20klU8/?source=m_redirect"
+url = "https://www.toutiao.com/c/user/token/MS4wLjABAAAAdcqujwKRt7SmuOsLdqTRlVctblwtDln-HNeRhihc1CM/?source=tuwen_detail&log_from=18b10eefd78d9_1744281078290"
 
 
 
