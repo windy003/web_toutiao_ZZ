@@ -82,6 +82,9 @@
                 // 按行分割
                 const lines = text.split('\n').filter(line => line.trim() !== '');
 
+                // 显示文件信息
+                infoDiv.innerHTML = `文件总行数：${lines.length}<br>第一行内容：${lines[0] || '无内容'}`;
+
                 // 随机选取 5 个元素
                 const randomLines = getRandomElements(lines, 5);
 
@@ -90,6 +93,7 @@
                 output.innerHTML = randomLines.map(line => `<p>${line}</p>`).join('');
             } catch (error) {
                 console.error('读取文件失败:', error);
+                infoDiv.innerHTML = '文件加载失败';
             }
         }
 
