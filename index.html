@@ -79,8 +79,8 @@
                 const response = await fetch(fileUrl);
                 const text = await response.text();
 
-                // 按行分割
-                const lines = text.split('\n').filter(line => line.trim() !== '');
+                // 按行分割并排除第一行
+                const lines = text.split('\n').filter(line => line.trim() !== '').slice(1);
 
                 // 显示文件信息
                 infoDiv.innerHTML = `文件总行数：${lines.length}<br>第一行内容：${lines[0] || '无内容'}`;
