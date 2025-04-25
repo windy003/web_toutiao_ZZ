@@ -68,22 +68,6 @@
             const fileUrl = `./头条作者文章库/${selectedText}.txt`;
             
         
-            // 根据选择的值显示不同信息
-            switch(selectedValue) {
-                case '1':
-                    infoDiv.innerHTML = 'BDJC12 的详细信息：爬取时间:2025-03-21';
-                    break;
-                case '2':
-                    infoDiv.innerHTML = '散文随风想 的详细信息: 爬取时间:2025-03-224';
-                    break;
-                case '4':
-                    infoDiv.innerHTML = '聪明的叶子r 的详细信息: 爬取时间:2025-04-10, 爬取条目:终端:300左右,耗时:2分钟左右';
-                    break;
-                default:
-                    infoDiv.innerHTML = '';
-            }
-
-
             loadAndDisplayRandomLines(fileUrl);
     });
 
