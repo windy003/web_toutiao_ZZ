@@ -3,48 +3,13 @@ import time
 import traceback
 
 
-# 创建配置对象
-options = ChromiumOptions()
-# options.set_argument('--headless=new')  # 使用新的无头模式
-# options.set_argument('--no-sandbox')    # 在Linux系统中添加此参数
-# options.set_argument('--disable-dev-shm-usage')  # 避免内存不足问题
-
-# 使用配置创建页面对象
-page = ChromiumPage(options)
-# print("已启动无头浏览器...")
-
-
-url = "https://www.toutiao.com/c/user/token/MS4wLjABAAAAdcqujwKRt7SmuOsLdqTRlVctblwtDln-HNeRhihc1CM/?source=tuwen_detail&log_from=18b10eefd78d9_1744281078290"
-
-
 
 try:
-    page.get(url)
 
-    # 滚动页面并加载更多内容
-    try:
-        # page.run_js('document.body.style.zoom = "25%"')  # 将页面缩放至10%
-        # 耗时6分钟,处理914个条目
-        # 使用 JavaScript 获取页面高度
-        last_height = page.run_js('return document.documentElement.scrollHeight')
-        while True:
-            page.scroll.to_bottom()
-            time.sleep(3)
-            new_height = page.run_js('return document.documentElement.scrollHeight')
-            if new_height == last_height:
-                time.sleep(6)
-                page.scroll.to_bottom()
-                new_height = page.run_js('return document.documentElement.scrollHeight')
-                if new_height == last_height:
-                    print("已到达页面底部，停止滚动。")
-                    break
+    page = ChromiumPage(addr_or_opts='127.0.0.1:4000')
+    print("已连接到现有浏览器...")
 
-            # 更新页面高度
-            last_height = new_height
-            
-    except Exception as e:
-        print(f"滚动页面失败: {e}")
-
+    input("按回车键继续...")
 
 
 
